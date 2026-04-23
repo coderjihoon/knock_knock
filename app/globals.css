@@ -1,26 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-bg-main: #fbf8f3;
+  --brand-bg-soft: #f2ede3;
+  --brand-card-white: #ffffff;
+  --brand-light-olive: #e8ede1;
+  --brand-main-olive: #a3ae7c;
+  --brand-deep-olive: #6f7d4e;
+  --brand-dark-olive: #48553a;
+  --brand-primary-text: #2b2a26;
+  --brand-secondary-text: #6b665e;
+  --brand-accent-brown: #5a4a3c;
+  --brand-font-title:
+    "Hahmlet", "Iowan Old Style", "Apple SD Gothic Neo", Georgia, serif;
+  --brand-font-body:
+    "Pretendard", "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR",
+    -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-main: var(--brand-bg-main);
+  --color-bg-soft: var(--brand-bg-soft);
+  --color-card-white: var(--brand-card-white);
+  --color-light-olive: var(--brand-light-olive);
+  --color-main-olive: var(--brand-main-olive);
+  --color-deep-olive: var(--brand-deep-olive);
+  --color-dark-olive: var(--brand-dark-olive);
+  --color-primary-text: var(--brand-primary-text);
+  --color-secondary-text: var(--brand-secondary-text);
+  --color-accent-brown: var(--brand-accent-brown);
+  --font-title: var(--brand-font-title);
+  --font-body: var(--brand-font-body);
+  --font-sans: var(--brand-font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--brand-bg-main);
+  color: var(--brand-primary-text);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--brand-bg-main);
+  color: var(--brand-primary-text);
+  font-family: var(--brand-font-body);
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--brand-main-olive) 36%, white);
+  color: var(--brand-dark-olive);
+}
+
+@keyframes member-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.member-marquee-shell {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 6%,
+    black 94%,
+    transparent
+  );
+}
+
+.member-marquee-track {
+  animation: member-marquee var(--marquee-duration, 32s) linear infinite;
+  will-change: transform;
+}
+
+.member-marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .member-marquee-track,
+  .member-marquee-track-reverse {
+    animation: none;
+  }
 }
