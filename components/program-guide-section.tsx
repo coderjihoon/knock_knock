@@ -1,6 +1,9 @@
+import Image from "next/image";
+
 type ProgramBook = {
   title: string;
   author: string;
+  coverSrc: string;
 };
 
 type ProgramWeek = {
@@ -17,7 +20,6 @@ type Program = {
   intro: string;
   books: readonly [ProgramBook, ProgramBook, ProgramBook];
   weeks: readonly [ProgramWeek, ProgramWeek, ProgramWeek, ProgramWeek];
-  stackClasses: readonly [string, string, string];
 };
 
 const bookPositionClasses = [
@@ -36,14 +38,17 @@ const programs = [
       {
         title: "늦깎이 천재들의 비밀",
         author: "데이비드 엡스타인",
+        coverSrc: "/books/8932920303_1.jpg",
       },
       {
         title: "두 번째 산",
         author: "데이비드 브룩스",
+        coverSrc: "/books/8960517771_1.jpg",
       },
       {
         title: "싯다르타",
         author: "헤르만 헤세",
+        coverSrc: "/books/s062934786_1.jpg",
       },
     ],
     weeks: [
@@ -77,11 +82,6 @@ const programs = [
           "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
       },
     ],
-    stackClasses: [
-      "bg-card-white",
-      "bg-light-olive",
-      "bg-bg-soft",
-    ],
   },
   {
     id: "02",
@@ -92,14 +92,17 @@ const programs = [
       {
         title: "행복의 기원",
         author: "서은국",
+        coverSrc: "/books/k012930648_2.jpg",
       },
       {
         title: "비터스위트",
         author: "수전 케인",
+        coverSrc: "/books/8925577984_1.jpg",
       },
       {
         title: "어린 왕자",
         author: "앙투안 드 생텍쥐베리",
+        coverSrc: "/books/8932917248_2.jpg",
       },
     ],
     weeks: [
@@ -133,11 +136,6 @@ const programs = [
           "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
       },
     ],
-    stackClasses: [
-      "bg-bg-soft",
-      "bg-card-white",
-      "bg-light-olive",
-    ],
   },
   {
     id: "03",
@@ -148,14 +146,17 @@ const programs = [
       {
         title: "평균의 종말",
         author: "토드 로즈",
+        coverSrc: "/books/8950995875_1.jpg",
       },
       {
         title: "죽음의 수용소에서",
         author: "빅터 프랭클",
+        coverSrc: "/books/8936812629_1.jpg",
       },
       {
         title: "데미안",
         author: "헤르만 헤세",
+        coverSrc: "/books/k042535550_2.jpg",
       },
     ],
     weeks: [
@@ -189,11 +190,6 @@ const programs = [
           "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
       },
     ],
-    stackClasses: [
-      "bg-light-olive",
-      "bg-card-white",
-      "bg-bg-soft",
-    ],
   },
   {
     id: "04",
@@ -204,14 +200,17 @@ const programs = [
       {
         title: "타인의 해석",
         author: "말콤 글래드웰",
+        coverSrc: "/books/8934985747_2.jpg",
       },
       {
         title: "사람을 안다는 것",
         author: "데이비드 브룩스",
+        coverSrc: "/books/8901280779_1.jpg",
       },
       {
         title: "참을 수 없는 존재의 가벼움",
         author: "밀란 쿤데라",
+        coverSrc: "/books/8937404664_1.jpg",
       },
     ],
     weeks: [
@@ -245,48 +244,32 @@ const programs = [
           "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
       },
     ],
-    stackClasses: [
-      "bg-card-white",
-      "bg-light-olive",
-      "bg-bg-soft",
-    ],
   },
 ] as const satisfies readonly Program[];
 
-function ProgramBookStack({
-  books,
-  stackClasses,
-}: {
-  books: Program["books"];
-  stackClasses: Program["stackClasses"];
-}) {
+function ProgramBookStack({ books }: { books: Program["books"] }) {
   return (
     <figure className="mt-9">
       <div className="relative h-[16.5rem]">
         {books.map((book, index) => (
           <div
             key={book.title}
-            className={`absolute h-[13.25rem] w-[10.25rem] rounded-[1.7rem] border border-dark-olive/10 px-4 py-4 shadow-[0_20px_40px_rgba(72,85,58,0.08)] ${bookPositionClasses[index]} ${stackClasses[index]}`}
+            className={`absolute flex h-[13.25rem] w-[10.25rem] touch-manipulation items-center justify-center transition-transform duration-150 ease-[cubic-bezier(0.22,1,0.36,1)] active:-translate-y-[2px] active:scale-[1.01] motion-reduce:transform-none motion-reduce:transition-none ${bookPositionClasses[index]}`}
           >
-            <p className="text-[0.64rem] uppercase tracking-[0.26em] text-deep-olive/80">
-              Book 0{index + 1}
-            </p>
-            <div className="mt-6 space-y-3">
-              <p className="font-title text-[1.08rem] leading-[1.5] tracking-[-0.04em] text-primary-text">
-                {book.title}
-              </p>
-              <p className="text-[0.88rem] leading-6 tracking-[-0.01em] text-secondary-text">
-                {book.author}
-              </p>
-            </div>
-            <div className="absolute inset-x-4 bottom-4 h-px bg-dark-olive/10" />
+            <Image
+              src={book.coverSrc}
+              alt={`${book.title} 표지`}
+              width={500}
+              height={742}
+              sizes="(max-width: 640px) 164px, 180px"
+              className="h-full w-auto rounded-[0.6rem] object-contain shadow-[0_20px_40px_rgba(72,85,58,0.12)]"
+            />
           </div>
         ))}
       </div>
 
-      <figcaption className="text-[0.88rem] leading-6 tracking-[-0.01em] text-secondary-text">
-        세 권의 책이 하나의 대화 흐름을 만들고, 같은 질문을 각자의 삶으로
-        옮겨 읽게 합니다.
+      <figcaption className="mt-6 text-center text-[0.88rem] leading-6 tracking-[-0.01em] text-secondary-text">
+        {books.map((book) => book.title).join(" | ")}
       </figcaption>
     </figure>
   );
@@ -294,12 +277,12 @@ function ProgramBookStack({
 
 function ProgramWeekList({ weeks }: { weeks: Program["weeks"] }) {
   return (
-    <ol className="mt-10 space-y-4 border-l border-dark-olive/12 pl-5">
+    <ol className="mt-6 ml-2 space-y-4 border-l border-dark-olive/12 pl-4">
       {weeks.map((week) => (
         <li key={week.label} className="relative">
-          <span className="absolute -left-[1.43rem] top-7 h-2.5 w-2.5 rounded-full bg-deep-olive" />
+          <span className="absolute -left-[1.34rem] top-7 h-2.5 w-2.5 rounded-full bg-deep-olive" />
 
-          <article className="rounded-[1.6rem] border border-dark-olive/10 bg-card-white/85 px-5 py-5 shadow-[0_14px_34px_rgba(72,85,58,0.06)] backdrop-blur-[2px]">
+          <article className="rounded-[1.6rem] border border-dark-olive/10 bg-card-white/85 px-5 py-5 backdrop-blur-[2px]">
             <p className="text-[0.68rem] uppercase tracking-[0.24em] text-deep-olive">
               {week.label}
             </p>
@@ -318,15 +301,52 @@ function ProgramWeekList({ weeks }: { weeks: Program["weeks"] }) {
             >
               {week.description}
             </p>
+          </article>
             {week.continuation ? (
               <p className="mt-4 rounded-full border border-main-olive/35 bg-light-olive px-4 py-2 text-[0.84rem] leading-6 tracking-[-0.01em] text-dark-olive">
-                {week.continuation}
+                * {week.continuation}
               </p>
             ) : null}
-          </article>
         </li>
       ))}
     </ol>
+  );
+}
+
+function ProgramWeekDisclosure({ weeks }: { weeks: Program["weeks"] }) {
+  return (
+    <details className="group mt-10">
+      <summary className="flex items-center gap-2 cursor-pointer list-none text-left text-primary-text [&::-webkit-details-marker]:hidden">
+        <span className="text-[1rem] leading-6 tracking-[-0.02em]">
+          <span className="group-open:hidden">자세히 보기</span>
+          <span className="hidden group-open:inline">테마 접기</span>
+        </span>
+
+        <span className="flex text-dark-olive transition-transform duration-300 ease-out group-open:rotate-180">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 20 20"
+            className="h-5 w-5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 8L10 13L15 8"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </summary>
+
+      <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-open:grid-rows-[1fr]">
+        <div className="overflow-hidden">
+          <ProgramWeekList weeks={weeks} />
+        </div>
+      </div>
+    </details>
   );
 }
 
@@ -343,9 +363,9 @@ export function ProgramGuideSection() {
           </p>
           <h2
             id="program-guide-heading"
-            className="max-w-[11ch] font-title text-[clamp(2.05rem,7vw,2.55rem)] leading-[1.28] tracking-[-0.055em] text-primary-text"
+            className="font-title text-[clamp(2.05rem,7vw,2.55rem)] leading-[1.28] tracking-[-0.055em] text-primary-text"
           >
-            노크노크는 실제로
+            노크노크는
             <br />
             어떻게 진행될까요?
           </h2>
@@ -354,17 +374,6 @@ export function ProgramGuideSection() {
             이후 4주 온라인 프로그램으로 생각을 자기 언어로 이어갑니다.
           </p>
         </header>
-
-        <div className="mt-8 rounded-[1.8rem] border border-dark-olive/10 bg-light-olive/70 p-5">
-          <p className="text-[0.68rem] uppercase tracking-[0.26em] text-deep-olive">
-            Offline 4 Weeks + Online 4 Weeks
-          </p>
-          <p className="mt-3 text-[0.97rem] leading-7 tracking-[-0.02em] text-primary-text">
-            같은 책을 읽고도 서로 다른 삶의 문장들이 모입니다. 오프라인에서는
-            질문을 나누고, 온라인에서는 그 대화를 오래 남는 자기 이야기로
-            정리합니다.
-          </p>
-        </div>
 
         <div className="mt-14">
           {programs.map((program, index) => (
@@ -375,7 +384,7 @@ export function ProgramGuideSection() {
                 index === 0
                   ? "pt-0"
                   : "border-t border-dark-olive/10 pt-14"
-              } pb-2`}
+              } pb-14`}
             >
               <span className="pointer-events-none absolute right-0 top-4 font-title text-[4.9rem] leading-none tracking-[-0.06em] text-main-olive/14">
                 {program.id}
@@ -383,7 +392,7 @@ export function ProgramGuideSection() {
 
               <div className="relative z-10">
                 <p className="text-[0.72rem] uppercase tracking-[0.24em] text-deep-olive">
-                  Theme {program.id}. {program.theme}
+                  Theme {program.id}
                 </p>
                 <h3
                   id={`program-theme-${program.id}`}
@@ -395,11 +404,8 @@ export function ProgramGuideSection() {
                   {program.intro}
                 </p>
 
-                <ProgramBookStack
-                  books={program.books}
-                  stackClasses={program.stackClasses}
-                />
-                <ProgramWeekList weeks={program.weeks} />
+                <ProgramBookStack books={program.books} />
+                <ProgramWeekDisclosure weeks={program.weeks} />
               </div>
             </article>
           ))}

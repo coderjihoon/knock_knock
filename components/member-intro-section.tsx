@@ -12,6 +12,7 @@ type MemberCard = {
   tag: string;
   avatar: NotionFaceAvatarVariant;
   surfaceClass: string;
+  highlighted?: boolean;
 };
 
 const memberRows: MemberCard[][] = [
@@ -44,7 +45,8 @@ const memberRows: MemberCard[][] = [
       note: "대화 끝에 남는 여운을 기록해두곤 해요.",
       tag: "문장",
       avatar: "dugeun",
-      surfaceClass: "bg-light-olive",
+      surfaceClass: "bg-deep-olive",
+      highlighted: true,
     },
     {
       name: "소복",
@@ -86,7 +88,8 @@ const memberRows: MemberCard[][] = [
       note: "서로를 소비하지 않는 대화에 끌립니다.",
       tag: "기준",
       avatar: "mulgyeol",
-      surfaceClass: "bg-light-olive",
+      surfaceClass: "bg-deep-olive",
+      highlighted: true,
     },
     {
       name: "여울",
@@ -118,7 +121,8 @@ const memberRows: MemberCard[][] = [
       note: "정답 없는 이야기에서 배울 때가 많아요.",
       tag: "균형",
       avatar: "seubim",
-      surfaceClass: "bg-light-olive",
+      surfaceClass: "bg-deep-olive",
+      highlighted: true,
     },
     {
       name: "온기",
@@ -143,6 +147,60 @@ const memberRows: MemberCard[][] = [
   ],
 ];
 
+function getMemberSurfaceKey(member: MemberCard) {
+  return member.highlighted ? "bg-deep-olive" : member.surfaceClass;
+}
+
+function arrangeMembersForMarquee(members: MemberCard[]) {
+  const arranged: MemberCard[] = [];
+  const used = new Array(members.length).fill(false);
+
+  function placeNext() {
+    if (arranged.length === members.length) {
+      if (arranged.length < 2) {
+        return true;
+      }
+
+      return (
+        getMemberSurfaceKey(arranged[0]) !==
+        getMemberSurfaceKey(arranged[arranged.length - 1])
+      );
+    }
+
+    const previousKey =
+      arranged.length > 0
+        ? getMemberSurfaceKey(arranged[arranged.length - 1])
+        : null;
+
+    for (let index = 0; index < members.length; index += 1) {
+      if (used[index]) {
+        continue;
+      }
+
+      const member = members[index];
+      const surfaceKey = getMemberSurfaceKey(member);
+
+      if (surfaceKey === previousKey) {
+        continue;
+      }
+
+      used[index] = true;
+      arranged.push(member);
+
+      if (placeNext()) {
+        return true;
+      }
+
+      arranged.pop();
+      used[index] = false;
+    }
+
+    return false;
+  }
+
+  return placeNext() ? arranged : members;
+}
+
 function MarqueeRow({
   members,
   reverse = false,
@@ -155,6 +213,7 @@ function MarqueeRow({
   const marqueeStyle = {
     "--marquee-duration": duration,
   } as CSSProperties;
+  const arrangedMembers = arrangeMembersForMarquee(members);
 
   return (
     <div className="member-marquee-shell overflow-hidden">
@@ -170,10 +229,14 @@ function MarqueeRow({
             aria-hidden={groupIndex === 1}
             className="flex min-w-max gap-4 pr-4"
           >
-            {members.map((member) => (
+            {arrangedMembers.map((member) => (
               <li key={`${groupIndex}-${member.name}`}>
                 <article
-                  className={`flex h-[20rem] w-[16.75rem] shrink-0 flex-col justify-between rounded-[1.8rem] border border-dark-olive/10 ${member.surfaceClass} p-5 shadow-[0_18px_48px_rgba(72,85,58,0.08)]`}
+                  className={`flex h-[20rem] w-[16.75rem] shrink-0 flex-col justify-between rounded-[1.8rem] border p-5 ${
+                    member.highlighted
+                      ? "border-deep-olive/80 bg-deep-olive"
+                      : `border-dark-olive/10 ${member.surfaceClass}`
+                  }`}
                 >
                   <div>
                     <div className="flex items-start justify-between gap-4">
@@ -183,27 +246,63 @@ function MarqueeRow({
                           className="h-11 w-11 shrink-0"
                         />
                         <div>
-                          <p className="text-[0.68rem] tracking-[0.18em] text-deep-olive">
+                          <p
+                            className={`text-[0.68rem] tracking-[0.18em] ${
+                              member.highlighted
+                                ? "text-bg-main/80"
+                                : "text-deep-olive"
+                            }`}
+                          >
                             {member.role}
                           </p>
-                          <h3 className="mt-1 font-title text-[1.35rem] leading-[1.24] tracking-[-0.04em] text-primary-text">
+                          <h3
+                            className={`mt-1 font-title text-[1.35rem] leading-[1.24] tracking-[-0.04em] ${
+                              member.highlighted
+                                ? "text-bg-main"
+                                : "text-primary-text"
+                            }`}
+                          >
                             {member.name}
                           </h3>
                         </div>
                       </div>
 
-                      <p className="rounded-full border border-dark-olive/10 bg-bg-main/80 px-3 py-1 text-[0.72rem] text-deep-olive">
+                      <p
+                        className={`rounded-full border px-3 py-1 text-[0.72rem] ${
+                          member.highlighted
+                            ? "border-bg-main/15 bg-bg-main/10 text-bg-main"
+                            : "border-dark-olive/10 bg-bg-main/80 text-deep-olive"
+                        }`}
+                      >
                         {member.tag}
                       </p>
                     </div>
 
-                    <p className="mt-6 text-[0.97rem] leading-7 tracking-[-0.02em] text-primary-text">
+                    <p
+                      className={`mt-6 text-[0.97rem] leading-7 tracking-[-0.02em] ${
+                        member.highlighted
+                          ? "text-bg-main"
+                          : "text-primary-text"
+                      }`}
+                    >
                       {member.summary}
                     </p>
                   </div>
 
-                  <div className="mt-8 border-t border-dark-olive/10 pt-4">
-                    <p className="text-[0.84rem] leading-6 tracking-[-0.01em] text-secondary-text">
+                  <div
+                    className={`mt-8 border-t pt-4 ${
+                      member.highlighted
+                        ? "border-bg-main/12"
+                        : "border-dark-olive/10"
+                    }`}
+                  >
+                    <p
+                      className={`text-[0.84rem] leading-6 tracking-[-0.01em] ${
+                        member.highlighted
+                          ? "text-bg-main/72"
+                          : "text-secondary-text"
+                      }`}
+                    >
                       {member.note}
                     </p>
                   </div>

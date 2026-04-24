@@ -28,8 +28,8 @@ export function VideoHeroSection() {
               함께 읽었는가
             </h1>
             <p className="text-[0.98rem] leading-7 tracking-[-0.02em] text-card-white/82">
-              임시 영상 파일이 들어간 첫 화면입니다. 나중에 실제 영상으로
-              같은 경로만 교체하면 됩니다.
+              서로의 삶을 오래 듣고 싶은 사람들과, 한 권의 책을 사이에 두고
+              천천히 가까워지는 시간입니다.
             </p>
           </div>
         </div>

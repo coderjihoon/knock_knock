@@ -39,6 +39,8 @@
 html {
   background: var(--brand-bg-main);
   color: var(--brand-primary-text);
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -90,6 +92,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .member-marquee-track,
   .member-marquee-track-reverse {
     animation: none;

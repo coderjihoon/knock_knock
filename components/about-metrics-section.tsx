@@ -21,7 +21,7 @@ const metrics = [
 
 export function AboutMetricsSection() {
   return (
-    <section className="bg-bg-soft px-5 pb-12 pt-[42px]">
+    <section id="about-section" className="bg-bg-soft px-5 pb-12 pt-[42px]">
       <div className="mx-auto w-full max-w-[32rem]">
         <p className="text-[12px] font-medium leading-none tracking-[-0.02em] text-dark-olive">
           About
