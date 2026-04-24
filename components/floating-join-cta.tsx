@@ -47,7 +47,7 @@ export function FloatingJoinCta() {
       }`}
     >
       <Link
-        href={joinCtaLink.href}
+        href="https://whattime.co.kr/knock_books/interview2"
         aria-hidden={!isVisible}
         tabIndex={isVisible ? 0 : -1}
         className={`inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full border border-main-olive bg-main-olive px-6 text-[0.95rem] font-medium tracking-[-0.02em] text-bg-main shadow-[0_18px_38px_rgba(111,125,78,0.28)] transition-[background-color,border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:border-deep-olive hover:bg-deep-olive hover:shadow-[0_22px_46px_rgba(72,85,58,0.24)] ${
