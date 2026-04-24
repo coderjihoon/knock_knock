@@ -10,7 +10,7 @@ export function VideoHeroSection() {
           playsInline
           preload="auto"
         >
-          <source src="/video/4K 5.mp4" type="video/mp4" />
+          <source src="/video/final2.mp4" type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(43,42,38,0.18)_0%,rgba(43,42,38,0.38)_46%,rgba(43,42,38,0.58)_100%)]" />

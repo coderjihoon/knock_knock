@@ -16,6 +16,7 @@ type ProgramWeek = {
 
 type Program = {
   id: string;
+  displayId: string;
   theme: string;
   intro: string;
   books: readonly [ProgramBook, ProgramBook, ProgramBook];
@@ -30,61 +31,8 @@ const bookPositionClasses = [
 
 const programs = [
   {
-    id: "01",
-    theme: "꿈",
-    intro:
-      "서둘러 정해둔 목표를 내려놓고, 가능성과 기쁨, 선택의 결을 따라 나만의 꿈의 형태를 발견해갑니다.",
-    books: [
-      {
-        title: "늦깎이 천재들의 비밀",
-        author: "데이비드 엡스타인",
-        coverSrc: "/books/8932920303_1.jpg",
-      },
-      {
-        title: "두 번째 산",
-        author: "데이비드 브룩스",
-        coverSrc: "/books/8960517771_1.jpg",
-      },
-      {
-        title: "싯다르타",
-        author: "헤르만 헤세",
-        coverSrc: "/books/s062934786_1.jpg",
-      },
-    ],
-    weeks: [
-      {
-        label: "Week1",
-        title: "가능성의 발견",
-        book: "늦깎이 천재들의 비밀, 데이비드 엡스타인",
-        description:
-          "서둘러 정하는 목표에서 꿈을 내려놓고, 나만의 가능성을 알아갑니다.",
-      },
-      {
-        label: "Week2",
-        title: "기쁨의 방향",
-        book: "두 번째 산, 데이비드 브룩스",
-        description:
-          "기쁨이 머무는 곳을 따라, 내가 기꺼이 헌신할 수 있는 대상을 발견합니다.",
-      },
-      {
-        label: "Week3",
-        title: "선택의 흐름",
-        book: "싯다르타, 헤르만 헤세",
-        description:
-          "과거와 오늘의 선택을 이해하며, 일상이 만들어가는 꿈을 이해합니다.",
-      },
-      {
-        label: "Week4",
-        title: "꿈의 형태",
-        description:
-          "오늘을 살아가는 이유를 발견하며, 나만의 꿈의 형태를 완성합니다.",
-        continuation:
-          "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
-      },
-    ],
-  },
-  {
     id: "02",
+    displayId: "Happiness",
     theme: "행복",
     intro:
       "일상 속 작은 기쁨과 상실의 의미를 함께 읽으며, 오래 남는 행복이 어떤 모양으로 남는지 천천히 완성합니다.",
@@ -132,114 +80,6 @@ const programs = [
         title: "행복의 모양",
         description:
           "지나온 순간과 마음 속 의미를 돌아보며, 내 행복의 모양을 완성합니다.",
-        continuation:
-          "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
-      },
-    ],
-  },
-  {
-    id: "03",
-    theme: "자기 이해",
-    intro:
-      "비교의 기준에서 벗어나 삶의 의미와 자기 수용을 차례로 만나며, 결국 나만의 이야기로 돌아오는 시간입니다.",
-    books: [
-      {
-        title: "평균의 종말",
-        author: "토드 로즈",
-        coverSrc: "/books/8950995875_1.jpg",
-      },
-      {
-        title: "죽음의 수용소에서",
-        author: "빅터 프랭클",
-        coverSrc: "/books/8936812629_1.jpg",
-      },
-      {
-        title: "데미안",
-        author: "헤르만 헤세",
-        coverSrc: "/books/k042535550_2.jpg",
-      },
-    ],
-    weeks: [
-      {
-        label: "Week1",
-        title: "기준의 발견",
-        book: "평균의 종말, 토드 로즈",
-        description:
-          "주변과의 비교를 내려놓고, 흔들림 없는 나만의 기준을 세웁니다.",
-      },
-      {
-        label: "Week2",
-        title: "삶의 의미",
-        book: "죽음의 수용소에서, 빅터 프랭클",
-        description:
-          "나의 이야기를 이해하며, 자신을 지탱해 줄 이유와 의미를 발견합니다.",
-      },
-      {
-        label: "Week3",
-        title: "자기 수용",
-        book: "데미안, 헤르만 헤세",
-        description:
-          "나의 여러 모습을 모두 받아들여, 온전한 자신을 알아갑니다.",
-      },
-      {
-        label: "Week4",
-        title: "나의 이야기",
-        description:
-          "고유한 자신의 모습을 발견하며, 나만의 이야기를 완성합니다.",
-        continuation:
-          "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
-      },
-    ],
-  },
-  {
-    id: "04",
-    theme: "관계",
-    intro:
-      "타인을 바라보는 시선을 다시 세우고, 사람과 관계의 무게를 이해하며 더 빛나는 관계의 태도로 나아갑니다.",
-    books: [
-      {
-        title: "타인의 해석",
-        author: "말콤 글래드웰",
-        coverSrc: "/books/8934985747_2.jpg",
-      },
-      {
-        title: "사람을 안다는 것",
-        author: "데이비드 브룩스",
-        coverSrc: "/books/8901280779_1.jpg",
-      },
-      {
-        title: "참을 수 없는 존재의 가벼움",
-        author: "밀란 쿤데라",
-        coverSrc: "/books/8937404664_1.jpg",
-      },
-    ],
-    weeks: [
-      {
-        label: "Week1",
-        title: "시선의 전환",
-        book: "타인의 해석, 말콤 글래드웰",
-        description:
-          "타인을 쉽게 단정하던 나의 시선을 바로잡아, 관계의 첫걸음을 새롭게 세웁니다.",
-      },
-      {
-        label: "Week2",
-        title: "사람의 이해",
-        book: "사람을 안다는 것, 데이비드 브룩스",
-        description:
-          "말과 행동에 있는 한 사람의 세상과 이야기를 이해할 수 있는 관점을 갖게 됩니다.",
-      },
-      {
-        label: "Week3",
-        title: "관계의 무게",
-        book: "참을 수 없는 존재의 가벼움, 밀란 쿤데라",
-        description:
-          "관계가 깊어지기 위해 필요한 무게와 선택의 의미를 깨닫습니다.",
-      },
-      {
-        label: "Week4",
-        title: "빛나는 관계",
-        description:
-          "자신과 관계의 여정을 되돌아보며, 빛나는 관계의 태도를 완성합니다.",
         continuation:
           "4주 오프라인 모임 후 4주 온라인 프로그램으로 이어집니다.",
       },
@@ -373,6 +213,9 @@ export function ProgramGuideSection() {
             각 프로그램은 하나의 질문에서 시작해 4주 오프라인 모임을 지나,
             이후 4주 온라인 프로그램으로 생각을 자기 언어로 이어갑니다.
           </p>
+          <p className="text-[0.94rem] leading-7 tracking-[-0.02em] text-secondary-text">
+            * 매 기수마다 테마가 변경됩니다.
+          </p>
         </header>
 
         <div className="mt-14">
@@ -386,13 +229,13 @@ export function ProgramGuideSection() {
                   : "border-t border-dark-olive/10 pt-14"
               } pb-14`}
             >
-              <span className="pointer-events-none absolute right-0 top-4 font-title text-[4.9rem] leading-none tracking-[-0.06em] text-main-olive/14">
-                {program.id}
+              <span className="pointer-events-none absolute right-0 top-4 font-title text-[3.35rem] leading-none tracking-[-0.06em] text-main-olive/14 sm:text-[4.25rem]">
+                {program.displayId}
               </span>
 
               <div className="relative z-10">
                 <p className="text-[0.72rem] uppercase tracking-[0.24em] text-deep-olive">
-                  Theme {program.id}
+                  THEME
                 </p>
                 <h3
                   id={`program-theme-${program.id}`}

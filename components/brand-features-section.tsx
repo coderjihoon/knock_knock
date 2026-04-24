@@ -97,7 +97,11 @@ export function BrandFeaturesSection() {
             id="brand-features-heading"
             className="max-w-[11ch] font-title text-[2.1rem] leading-[1.35] tracking-[-0.035em] text-primary-text"
           >
-            결국 중요한 건, ‘함께하는 사람들’이니까요.
+            결국 중요한 건,
+            <br />
+            ‘함께하는 사람들’
+            <br />
+            이니까요.
           </h1>
           <p className="max-w-[28ch] text-[1rem] leading-7 text-secondary-text">
             같은 책을 읽는 시간보다 더 오래 남는 건, 어떤 사람들과 어떤
