@@ -1,17 +1,16 @@
+import { AmbientVideo } from "@/components/ambient-video";
+
 export function VideoHeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-dark-olive">
       <div className="relative min-h-[100svh]">
-        <video
+        <AmbientVideo
           className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-        >
-          <source src="/video/final2.mp4" type="video/mp4" />
-        </video>
+          desktopSrc="/video/final2.mp4"
+          mobileSrc="/video/final2-mobile.mp4"
+          poster="/video/final2-poster.jpg"
+          preload="metadata"
+        />
 
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(43,42,38,0.18)_0%,rgba(43,42,38,0.38)_46%,rgba(43,42,38,0.58)_100%)]" />
 

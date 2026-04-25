@@ -1,6 +1,8 @@
 import Image from "next/image";
 import type { ElementType } from "react";
 
+import { AmbientVideo } from "@/components/ambient-video";
+
 type ValueItem = {
   title: string;
   body: string;
@@ -67,16 +69,12 @@ export function CommunityValuesSection({
       aria-labelledby="community-values-heading"
       className="relative overflow-hidden bg-black px-5 py-18 sm:px-6 lg:px-8"
     >
-      <video
+      <AmbientVideo
         className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      >
-        <source src="/video/4K 5.mp4" type="video/mp4" />
-      </video>
+        desktopSrc="/video/4K 5.mp4"
+        preload="none"
+        loadWhenVisible
+      />
 
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.28)_42%,rgba(0,0,0,0.42)_100%)]" />
