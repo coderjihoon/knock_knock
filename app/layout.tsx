@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-J9J5W0XMX6";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://knock-books-app.vercel.app"),
@@ -43,6 +46,18 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-full bg-bg-main antialiased">
       <body className="flex min-h-full flex-col bg-bg-main font-body text-primary-text">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <SiteHeader />
         {children}
         <SiteFooter />
