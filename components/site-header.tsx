@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
 import { useEffect, useState } from "react";
 import { joinCtaLink } from "@/components/join-cta-link";
 
 const headerJoinCtaHref = "/#bottom-cta-section";
+const headerJoinCtaTargetId = "bottom-cta-section";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -23,6 +25,22 @@ export function SiteHeader() {
       window.removeEventListener("scroll", updateScrollState);
     };
   }, [pathname]);
+
+  const handleJoinCtaClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const target = document.getElementById(headerJoinCtaTargetId);
+
+    if (!target) {
+      return;
+    }
+
+    event.preventDefault();
+    window.history.replaceState(null, "", `/#${headerJoinCtaTargetId}`);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const isOverlay = pathname === "/" && !isScrolled;
   const needsOffset = pathname !== "/";
@@ -48,8 +66,9 @@ export function SiteHeader() {
           </Link>
 
           <nav aria-label="주요 이동" className="shrink-0">
-            <Link
+            <a
               href={headerJoinCtaHref}
+              onClick={handleJoinCtaClick}
               className={`block rounded-full px-4 py-2.5 text-[0.82rem] font-medium tracking-[-0.02em] transition-[background-color,border-color,box-shadow,color] duration-300 ${
                 isOverlay
                   ? "border border-card-white/15 bg-card-white/10 text-card-white shadow-[0_10px_28px_rgba(43,42,38,0.12)] backdrop-blur-sm hover:bg-card-white/16"
@@ -57,7 +76,7 @@ export function SiteHeader() {
               }`}
             >
               {joinCtaLink.label}
-            </Link>
+            </a>
           </nav>
         </div>
       </header>

@@ -5,14 +5,14 @@ export function VideoHeroSection() {
     <section className="relative isolate overflow-hidden bg-dark-olive">
       <div className="relative min-h-[100svh]">
         <AmbientVideo
-          className="absolute inset-0 h-full w-full object-cover"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           desktopSrc="/video/final2.mp4"
           mobileSrc="/video/final2-mobile.mp4"
           poster="/video/final2-poster.jpg"
           preload="metadata"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(43,42,38,0.18)_0%,rgba(43,42,38,0.38)_46%,rgba(43,42,38,0.58)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(43,42,38,0.18)_0%,rgba(43,42,38,0.38)_46%,rgba(43,42,38,0.58)_100%)]" />
 
         <div className="relative z-10 flex min-h-[100svh] items-center justify-center px-8 py-16 text-center">
           <div className="max-w-[18rem] space-y-5 text-card-white">
