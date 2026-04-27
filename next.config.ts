@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         source: "/invitation12",
         destination: "https://knock-books.vercel.app/invitation12",
       },
+      {
+        source: "/invitation12/:path*",
+        destination: "https://knock-books.vercel.app/invitation12/:path*",
+      },
     ];
   },
 };
